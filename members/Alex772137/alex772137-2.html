@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Alex772137 · 自我介绍</title>
+<meta name="description" content="Alex772137 的自我介绍 —— 数据科学与大数据技术 · INFJ · 跑步 · 美剧" />
+<style>
+  :root{
+    --ink:#eaf3ff;
+    --muted:#93a9c9;
+    --dim:#6c83a6;
+    --cyan:#79e4ff;
+    --blue:#4d8cff;
+    --violet:#8a6bff;
+    --accent:linear-gradient(110deg,#79e4ff 0%,#4d8cff 45%,#8a6bff 100%);
+  }
+
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    background:#04070f;
+    color:var(--ink);
+    font-family:"Inter","Segoe UI","PingFang SC","Microsoft YaHei","Source Han Sans SC",system-ui,-apple-system,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    overflow-x:hidden;
+  }
+
+  /* ---------- 背景 ---------- */
+  .stage{
+    position:relative;
+    min-height:100vh;
+    min-height:100svh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:clamp(20px,4vh,48px) clamp(16px,4vw,48px);
+    overflow:hidden;
+    isolation:isolate;
+  }
+  .stage::before{
+    content:"";
+    position:fixed;
+    left:50%;top:50%;
+    width:min(1040px,128vw);
+    height:min(720px,92vh);
+    transform:translate(-50%,-50%);
+    z-index:-2;
+    pointer-events:none;
+    background:radial-gradient(50% 50% at 50% 50%, rgba(64,124,255,.20), transparent 72%);
+    filter:blur(30px);
+    animation:halo 9s ease-in-out infinite alternate;
+  }
+  @keyframes halo{
+    from{opacity:.65;transform:translate(-50%,-50%) scale(.96)}
+    to{opacity:1;transform:translate(-50%,-50%) scale(1.07)}
+  }
+  #bg{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    z-index:-3;
+    opacity:.9;
+  }
+  .aurora{
+    position:fixed;
+    inset:-20%;
+    z-index:-2;
+    pointer-events:none;
+    background:
+      radial-gradient(38% 42% at 18% 22%, rgba(50,110,255,.26), transparent 62%),
+      radial-gradient(34% 38% at 84% 18%, rgba(110,90,255,.22), transparent 64%),
+      radial-gradient(50% 50% at 62% 92%, rgba(0,170,255,.20), transparent 66%);
+    filter:blur(12px);
+    animation:drift 26s ease-in-out infinite alternate;
+  }
+  @keyframes drift{
+    0%{transform:translate3d(-2%,-1%,0) scale(1)}
+    100%{transform:translate3d(2%,2%,0) scale(1.08)}
+  }
+  .vignette{
+    position:fixed;
+    inset:0;
+    z-index:-1;
+    pointer-events:none;
+    background:radial-gradient(120% 90% at 50% 45%, transparent 40%, rgba(2,5,12,.55) 82%, rgba(2,4,10,.9) 100%);
+  }
+  .grain{
+    position:fixed;
+    inset:0;
+    z-index:1;
+    pointer-events:none;
+    opacity:.05;
+    mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .spotlight{
+    position:fixed;
+    inset:0;
+    z-index:0;
+    pointer-events:none;
+    background:radial-gradient(520px circle at var(--mx,50%) var(--my,40%), rgba(95,165,255,.10), transparent 62%);
+    transition:background .18s linear;
+  }
+
+  /* ---------- 卡片 ---------- */
+  .card{
+    position:relative;
+    width:min(820px,100%);
+    padding:clamp(30px,4.2vw,50px) clamp(26px,5.4vw,62px);
+    border-radius:28px;
+    background:linear-gradient(158deg,rgba(20,36,66,.66) 0%,rgba(8,15,30,.86) 58%,rgba(6,11,24,.9) 100%);
+    border:1px solid rgba(140,190,255,.14);
+    box-shadow:
+      0 50px 140px -50px rgba(0,45,140,.85),
+      0 0 0 1px rgba(255,255,255,.02) inset,
+      0 1px 0 rgba(255,255,255,.07) inset;
+    backdrop-filter:blur(20px) saturate(150%);
+    -webkit-backdrop-filter:blur(20px) saturate(150%);
+    overflow:hidden;
+    animation:cardIn 1.1s cubic-bezier(.2,.75,.2,1) both;
+  }
+  .card::before{
+    content:"";
+    position:absolute;
+    top:0;left:12%;right:12%;
+    height:1px;
+    background:linear-gradient(90deg,transparent,rgba(130,200,255,.65),transparent);
+    opacity:.8;
+  }
+  .card::after{
+    content:"";
+    position:absolute;
+    width:340px;height:340px;
+    right:-140px;bottom:-160px;
+    background:radial-gradient(circle,rgba(90,140,255,.20),transparent 68%);
+    pointer-events:none;
+  }
+  @keyframes cardIn{
+    from{opacity:0;transform:translateY(26px) scale(.985);filter:blur(6px)}
+    to{opacity:1;transform:none;filter:none}
+  }
+
+  /* ---------- 顶部小标 ---------- */
+  .meta{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    font-size:11px;
+    letter-spacing:.34em;
+    text-transform:uppercase;
+    color:var(--dim);
+    margin-bottom:clamp(16px,2.4vw,22px);
+  }
+  .meta .rule{
+    flex:1;
+    height:1px;
+    background:linear-gradient(90deg,rgba(120,180,255,.35),transparent);
+  }
+  .meta .rule.left{background:linear-gradient(90deg,transparent,rgba(120,180,255,.35))}
+  .meta b{color:#9fc0ea;font-weight:500}
+
+  /* ---------- 姓名 ---------- */
+  .name{
+    margin:0 0 6px;
+    font-size:clamp(2.5rem,7.4vw,4.4rem);
+    line-height:1.02;
+    font-weight:200;
+    letter-spacing:-.02em;
+    display:flex;
+    flex-wrap:wrap;
+    align-items:baseline;
+    gap:0 .12em;
+  }
+  .name .thin{
+    font-weight:200;
+    color:#e8f2ff;
+    text-shadow:0 0 44px rgba(90,160,255,.35);
+  }
+  .name .num{
+    font-weight:600;
+    letter-spacing:.01em;
+    background:linear-gradient(100deg,#d8efff 0%,#7fc9ff 18%,#3f7dff 44%,#6d5bff 68%,#a98bfb 86%,#d8efff 100%);
+    background-size:220% auto;
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    animation:sheen 9s linear infinite;
+    filter:drop-shadow(0 0 26px rgba(77,140,255,.35));
+  }
+  @keyframes sheen{
+    to{background-position:220% center}
+  }
+
+  /* ---------- 身份行 ---------- */
+  .role{
+    margin:12px 0 18px;
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:10px 16px;
+    font-size:clamp(13px,1.6vw,14px);
+    letter-spacing:.16em;
+    color:#9db4d4;
+  }
+  .role .sep{
+    width:4px;height:4px;
+    border-radius:50%;
+    background:var(--blue);
+    box-shadow:0 0 12px rgba(77,140,255,.9);
+  }
+
+  .chips{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin:0 0 clamp(20px,3vw,26px);
+    padding:0;
+    list-style:none;
+  }
+  .chips li{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:7px 14px;
+    border-radius:999px;
+    border:1px solid rgba(130,180,255,.16);
+    background:linear-gradient(180deg,rgba(70,120,210,.14),rgba(30,60,120,.10));
+    font-size:12px;
+    letter-spacing:.14em;
+    color:#aec7e8;
+    transition:border-color .35s,color .35s,transform .35s,background .35s;
+  }
+  .chips li:hover{
+    transform:translateY(-2px);
+    border-color:rgba(130,200,255,.42);
+    color:#dff0ff;
+    background:linear-gradient(180deg,rgba(80,140,240,.22),rgba(30,60,120,.14));
+  }
+  .chips i{
+    font-style:normal;
+    font-size:10px;
+    letter-spacing:.08em;
+    color:#5f7ba3;
+    font-variant-numeric:tabular-nums;
+  }
+
+  .divider{
+    height:1px;
+    margin:0 0 clamp(18px,2.8vw,24px);
+    background:linear-gradient(90deg,rgba(120,180,255,.30),rgba(120,180,255,.06) 60%,transparent);
+  }
+
+  /* ---------- 正文 ---------- */
+  .bio{
+    font-size:clamp(14.5px,1.75vw,16.4px);
+    line-height:1.95;
+    letter-spacing:.025em;
+    color:#bed0e8;
+    text-wrap:pretty;
+  }
+  .bio p{margin:0 0 1.05em}
+  .bio p:last-child{margin-bottom:0}
+  .bio p:nth-child(2),.bio p:nth-child(3){color:#a9bdd8}
+  .bio strong{
+    font-weight:500;
+    color:#dff0ff;
+    background:linear-gradient(180deg,transparent 68%,rgba(77,140,255,.28) 68%);
+  }
+  .bio .accent{
+    background:var(--accent);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    font-weight:500;
+  }
+  .bio .last{
+    margin-top:1.4em;
+    padding:16px 20px;
+    border-left:2px solid rgba(120,190,255,.55);
+    border-radius:0 10px 10px 0;
+    background:linear-gradient(90deg,rgba(60,120,220,.13),rgba(60,120,220,0));
+    color:#d6e7fb;
+  }
+
+  /* ---------- 底部 ---------- */
+  .foot{
+    margin-top:clamp(22px,3vw,30px);
+    padding-top:15px;
+    border-top:1px solid rgba(130,180,255,.10);
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    font-size:10.5px;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    color:#5e7699;
+  }
+  .foot span:last-child{color:#7f9cc4}
+
+  /* ---------- 入场 ---------- */
+  .rise{
+    opacity:0;
+    animation:rise .95s cubic-bezier(.2,.75,.2,1) both;
+    animation-delay:var(--d,0s);
+  }
+  @keyframes rise{
+    from{opacity:0;transform:translateY(16px);filter:blur(4px)}
+    to{opacity:1;transform:none;filter:none}
+  }
+
+  /* 动画不生效时兜底，保证内容一定可见 */
+  .settled .card{animation:none;opacity:1;transform:none;filter:none}
+  .settled .rise{animation:none;opacity:1;transform:none;filter:none}
+
+  ::selection{background:rgba(77,140,255,.35);color:#fff}
+
+  @media (max-width:560px){
+    .card{border-radius:20px}
+    .meta{font-size:10px;letter-spacing:.24em}
+    .bio{line-height:1.98}
+    .foot{font-size:9.5px;letter-spacing:.18em}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none!important;transition:none!important}
+    .rise{opacity:1}
+  }
+</style>
+</head>
+<body>
+
+<div class="stage">
+  <canvas id="bg" aria-hidden="true"></canvas>
+  <div class="aurora" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="spotlight" id="spot" aria-hidden="true"></div>
+
+  <main class="card">
+    <div class="meta rise" style="--d:.15s">
+      <span class="rule left" aria-hidden="true"></span>
+      <span>Self&nbsp;·&nbsp;Intro</span>
+      <span class="rule" aria-hidden="true"></span>
+      <b>N°&nbsp;001</b>
+    </div>
+
+    <h1 class="name rise" style="--d:.25s">
+      <span class="thin">Alex</span><span class="num">772137</span>
+    </h1>
+
+    <p class="role rise" style="--d:.35s">
+      <span>数据科学与大数据技术</span>
+      <span class="sep" aria-hidden="true"></span>
+      <span>INFJ</span>
+      <span class="sep" aria-hidden="true"></span>
+      <span>Running&nbsp;&amp;&nbsp;TV&nbsp;Series</span>
+    </p>
+
+    <ul class="chips rise" style="--d:.45s">
+      <li><i>01</i>跑步</li>
+      <li><i>02</i>美剧</li>
+      <li><i>03</i>数据</li>
+    </ul>
+
+    <div class="divider" aria-hidden="true"></div>
+
+    <article class="bio">
+      <p class="rise" style="--d:.55s">
+        我是 Alex772137，数据科学与大数据技术专业。比起标准答案，我更着迷于从一团乱麻里揪出那条隐藏的线——这大概就是我选择数据的原因。
+      </p>
+      <p class="rise" style="--d:.65s">
+        INFJ，人群里常是最安静的那个，脑子里却同时开着十几个标签页；看起来温和，认准的事却很轴。跑步是我清空缓存的方式，一圈一圈把杂念跑掉；美剧是我给想象力充电的方式，看别人怎么生活，也顺便练习怎么理解人。
+      </p>
+      <p class="rise" style="--d:.75s">
+        我相信数据会讲故事，也相信好的关系来自认真倾听。课余的理想状态很简单：一双跑鞋，一部好剧，一份终于跑通的代码。
+      </p>
+      <p class="last rise" style="--d:.85s">
+        这次培训，我想带走两样东西：能真正上手用的知识，和几个聊得来的朋友。如果你也跑步、也追剧，欢迎来拍我肩膀——我们大概能从剧荒一路聊到算法，最后聊成朋友。
+      </p>
+    </article>
+
+    <div class="foot rise" style="--d:.95s">
+      <span>Training&nbsp;·&nbsp;2026</span>
+      <span>学知识 · 交朋友</span>
+    </div>
+  </main>
+
+  <div class="grain" aria-hidden="true"></div>
+</div>
+
+<script>
+(function(){
+  const canvas = document.getElementById('bg');
+  const ctx = canvas.getContext('2d');
+  const spot = document.getElementById('spot');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  let w = 0, h = 0, dpr = 1;
+  let dots = [];
+  let meteors = [];
+  let meteorGap = 600;
+  let lastT = 0;
+  const pointer = { x: 0.5, y: 0.4, tx: 0.5, ty: 0.4, sx: 0, sy: 0 };
+
+  function resize(){
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = window.innerWidth;
+    h = window.innerHeight;
+    canvas.width = Math.floor(w * dpr);
+    canvas.height = Math.floor(h * dpr);
+    canvas.style.width = w + 'px';
+    canvas.style.height = h + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    build();
+  }
+
+  function build(){
+    const count = Math.min(96, Math.round((w * h) / 17000));
+    dots = [];
+    for (let i = 0; i < count; i++){
+      dots.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.16,
+        vy: (Math.random() - 0.5) * 0.16,
+        r: Math.random() * 1.5 + 0.5,
+        d: Math.random() * 0.7 + 0.3,
+        tw: Math.random() * Math.PI * 2
+      });
+    }
+  }
+
+  /* ---------- 流星 ---------- */
+  function spawnMeteor(){
+    const dir = Math.random() < 0.5 ? 1 : -1;
+    const angle = 0.28 + Math.random() * 0.26;
+    const speed = 760 + Math.random() * 640;
+    const fromTop = Math.random() < 0.3;
+    let x, y;
+    if (fromTop){
+      x = Math.random() < 0.7
+        ? (Math.random() < 0.5 ? Math.random() * w * 0.3 : w - Math.random() * w * 0.3)
+        : Math.random() * w;
+      y = -70 - Math.random() * 90;
+    } else {
+      x = dir === 1 ? -100 - Math.random() * 60 : w + 100 + Math.random() * 60;
+      y = Math.random() * h * 0.85;
+    }
+    meteors.push({
+      x: x, y: y,
+      vx: Math.cos(angle) * speed * dir,
+      vy: Math.sin(angle) * speed,
+      len: 100 + Math.random() * 110,
+      life: 0,
+      max: 1.4 + Math.random() * 1.1,
+      wd: 1.8 + Math.random() * 1.8
+    });
+  }
+
+  function drawMeteors(dt){
+    for (let i = meteors.length - 1; i >= 0; i--){
+      const m = meteors[i];
+      m.life += dt;
+      m.x += m.vx * dt;
+      m.y += m.vy * dt;
+      if (m.life > m.max || m.y > h + 280 || m.x < -380 || m.x > w + 380){
+        meteors.splice(i, 1);
+        continue;
+      }
+
+      const p = m.life / m.max;
+      const env = p < 0.12 ? p / 0.12 : (p > 0.68 ? Math.max(0, (1 - p) / 0.32) : 1);
+      const sp = Math.hypot(m.vx, m.vy) || 1;
+      const ux = m.vx / sp, uy = m.vy / sp;
+      const tx = m.x - ux * m.len;
+      const ty = m.y - uy * m.len;
+
+      const g = ctx.createLinearGradient(tx, ty, m.x, m.y);
+      g.addColorStop(0, 'rgba(120,180,255,0)');
+      g.addColorStop(0.35, 'rgba(150,205,255,' + (0.26 * env).toFixed(3) + ')');
+      g.addColorStop(0.75, 'rgba(205,236,255,' + (0.70 * env).toFixed(3) + ')');
+      g.addColorStop(1, 'rgba(255,255,255,' + (0.97 * env).toFixed(3) + ')');
+
+      const nx = -uy, ny = ux;
+      const hw = m.wd * 0.8;
+
+      ctx.save();
+      ctx.globalCompositeOperation = 'lighter';
+      ctx.lineCap = 'round';
+
+      // 外层柔光
+      ctx.strokeStyle = 'rgba(115,180,255,' + (0.16 * env).toFixed(3) + ')';
+      ctx.lineWidth = m.wd * 6;
+      ctx.beginPath();
+      ctx.moveTo(tx, ty);
+      ctx.lineTo(m.x, m.y);
+      ctx.stroke();
+
+      // 锥形本体：头宽尾尖
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.moveTo(m.x + nx * hw, m.y + ny * hw);
+      ctx.lineTo(m.x - nx * hw, m.y - ny * hw);
+      ctx.lineTo(tx, ty);
+      ctx.closePath();
+      ctx.fill();
+
+      const hr = 8 + m.wd * 4;
+      const hg = ctx.createRadialGradient(m.x, m.y, 0, m.x, m.y, hr);
+      hg.addColorStop(0, 'rgba(245,252,255,' + (0.95 * env).toFixed(3) + ')');
+      hg.addColorStop(0.28, 'rgba(160,210,255,' + (0.38 * env).toFixed(3) + ')');
+      hg.addColorStop(1, 'rgba(110,170,255,0)');
+      ctx.fillStyle = hg;
+      ctx.beginPath();
+      ctx.arc(m.x, m.y, hr, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+
+    meteorGap -= dt * 1000;
+    if (meteorGap <= 0){
+      spawnMeteor();
+      if (Math.random() < 0.22) spawnMeteor();
+      meteorGap = 900 + Math.random() * 2100;
+    }
+  }
+
+  function draw(t){
+    const dt = lastT ? Math.min((t - lastT) / 1000, 0.05) : 0.016;
+    lastT = t;
+
+    ctx.clearRect(0, 0, w, h);
+
+    // 视差偏移
+    pointer.sx += (pointer.tx - pointer.sx) * 0.05;
+    pointer.sy += (pointer.ty - pointer.sy) * 0.05;
+    const ox = (pointer.sx - 0.5) * 26;
+    const oy = (pointer.sy - 0.5) * 26;
+
+    for (const p of dots){
+      if (!reduce){
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < -20) p.x = w + 20;
+        if (p.x > w + 20) p.x = -20;
+        if (p.y < -20) p.y = h + 20;
+        if (p.y > h + 20) p.y = -20;
+      }
+      const px = p.x + ox * p.d;
+      const py = p.y + oy * p.d;
+      const tw = 0.45 + Math.sin(t * 0.0009 + p.tw) * 0.25;
+      ctx.beginPath();
+      ctx.arc(px, py, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(140,200,255,' + (0.30 * p.d * tw + 0.06) + ')';
+      ctx.fill();
+    }
+
+    // 连线
+    const max = 132;
+    for (let i = 0; i < dots.length; i++){
+      const a = dots[i];
+      for (let j = i + 1; j < dots.length; j++){
+        const b = dots[j];
+        const dx = a.x - b.x, dy = a.y - b.y;
+        const d2 = dx * dx + dy * dy;
+        if (d2 > max * max) continue;
+        const alpha = (1 - Math.sqrt(d2) / max) * 0.13;
+        ctx.strokeStyle = 'rgba(105,165,255,' + alpha + ')';
+        ctx.lineWidth = 0.6;
+        ctx.beginPath();
+        ctx.moveTo(a.x + ox * a.d, a.y + oy * a.d);
+        ctx.lineTo(b.x + ox * b.d, b.y + oy * b.d);
+        ctx.stroke();
+      }
+    }
+
+    if (!reduce){
+      drawMeteors(dt);
+      requestAnimationFrame(draw);
+    }
+  }
+
+  window.addEventListener('resize', () => { resize(); if (reduce) draw(0); }, { passive: true });
+
+  window.addEventListener('pointermove', (e) => {
+    pointer.tx = e.clientX / w;
+    pointer.ty = e.clientY / h;
+    spot.style.setProperty('--mx', e.clientX + 'px');
+    spot.style.setProperty('--my', e.clientY + 'px');
+  }, { passive: true });
+
+  resize();
+  requestAnimationFrame(draw);
+
+  // 兜底：即使动画未执行，2.4 秒后也直接呈现最终状态
+  window.setTimeout(function(){ document.body.classList.add('settled'); }, 2400);
+})();
+</script>
+</body>
+</html>
