@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>songyang-prog - 个人介绍</title>
+    <style>
+        :root {
+            --bg-color: #000000;
+            --bg-grid-color: rgba(0, 224, 255, 0.08);
+            --bg-scanline-color: rgba(0, 224, 255, 0.04);
+            --text-color: #e6f1ff;
+            --card-bg: rgba(10, 12, 20, 0.92);
+            --card-bg-hover: rgba(14, 18, 28, 0.98);
+            --border-color: #1f3b73;
+            --border-glow: #00e0ff;
+            --accent-color: #00e0ff;
+            --accent-secondary: #ff3b3b;
+            --button-bg: rgba(10, 12, 20, 0.9);
+            --button-text: #e6f1ff;
+            --button-border: #1f3b73;
+            --hud-line: #00e0ff;
+            --hud-square: #ff3b3b;
+            --selection-bg: rgba(0, 224, 255, 0.28);
+            --selection-text: #f8fcff;
+            --list-dot: #00e0ff;
+            --list-hover-bg: rgba(0, 224, 255, 0.12);
+            --shadow-glow: 0 0 0 1px rgba(0, 224, 255, 0.25), 0 0 18px -8px rgba(0, 224, 255, 0.9);
+        }
+
+        [data-theme="light"] {
+            --bg-color: #f5f7fa;
+            --bg-grid-color: rgba(26, 26, 26, 0.06);
+            --bg-scanline-color: transparent;
+            --text-color: #1a1a1a;
+            --card-bg: #ffffff;
+            --card-bg-hover: #ffffff;
+            --border-color: #8a8a8a;
+            --border-glow: #d62828;
+            --accent-color: #d62828;
+            --accent-secondary: #0057b8;
+            --button-bg: #ffffff;
+            --button-text: #1a1a1a;
+            --button-border: #8a8a8a;
+            --hud-line: #d62828;
+            --hud-square: #0057b8;
+            --selection-bg: rgba(214, 40, 40, 0.22);
+            --selection-text: #1a1a1a;
+            --list-dot: #d62828;
+            --list-hover-bg: rgba(214, 40, 40, 0.08);
+            --shadow-glow: 0 0 0 1px rgba(26, 26, 26, 0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        ::selection {
+            background-color: var(--selection-bg);
+            color: var(--selection-text);
+        }
+
+        ::-moz-selection {
+            background-color: var(--selection-bg);
+            color: var(--selection-text);
+        }
+
+        body {
+            font-family: monospace, 'Courier New', Courier;
+            background-color: var(--bg-color);
+            background-image:
+                repeating-linear-gradient(
+                    0deg,
+                    transparent 0,
+                    transparent 19px,
+                    var(--bg-grid-color) 19px,
+                    var(--bg-grid-color) 20px
+                ),
+                repeating-linear-gradient(
+                    90deg,
+                    transparent 0,
+                    transparent 19px,
+                    var(--bg-grid-color) 19px,
+                    var(--bg-grid-color) 20px
+                );
+            background-attachment: fixed;
+            color: var(--text-color);
+            line-height: 1.9;
+            letter-spacing: 0.05em;
+            padding: 3rem 1.5rem;
+            min-width: 0;
+            position: relative;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background-image: repeating-linear-gradient(
+                0deg,
+                transparent 0,
+                transparent 2px,
+                var(--bg-scanline-color) 2px,
+                var(--bg-scanline-color) 4px
+            );
+            mix-blend-mode: screen;
+            z-index: 0;
+        }
+
+        [data-theme="light"] body::after {
+            display: none;
+        }
+
+        .container {
+            max-width: 820px;
+            margin: 0 auto;
+            width: 100%;
+            min-width: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+            min-width: 0;
+            position: relative;
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -0.8rem;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, var(--hud-line) 0%, transparent 70%);
+        }
+
+        header::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -1.1rem;
+            width: 42px;
+            height: 4px;
+            background-color: var(--hud-square);
+            box-shadow: 0 0 12px rgba(255, 59, 59, 0.6);
+        }
+
+        [data-theme="light"] header::after {
+            box-shadow: none;
+        }
+
+        h1 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            word-break: break-word;
+            min-width: 0;
+            position: relative;
+            padding-left: 1.6rem;
+        }
+
+        h1::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 10px;
+            height: 10px;
+            background-color: var(--hud-square);
+            box-shadow: 0 0 14px rgba(255, 59, 59, 0.7);
+        }
+
+        [data-theme="light"] h1::before {
+            box-shadow: none;
+        }
+
+        .theme-toggle {
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            border: 1px solid var(--button-border);
+            padding: 0.6rem 1.4rem;
+            border-radius: 0;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: inherit;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            white-space: nowrap;
+            flex-shrink: 0;
+            position: relative;
+            clip-path: polygon(8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px), 0 8px);
+            transition: color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, text-shadow 0.25s ease;
+        }
+
+        .theme-toggle::before,
+        .theme-toggle::after {
+            content: "";
+            position: absolute;
+            background-color: var(--hud-line);
+        }
+
+        .theme-toggle::before {
+            top: -1px;
+            left: 10px;
+            width: 16px;
+            height: 1px;
+        }
+
+        .theme-toggle::after {
+            bottom: -1px;
+            right: 10px;
+            width: 16px;
+            height: 1px;
+        }
+
+        .theme-toggle:hover {
+            color: var(--accent-color);
+            border-color: var(--border-glow);
+            text-shadow: 0 0 8px rgba(0, 224, 255, 0.8);
+            box-shadow: var(--shadow-glow);
+        }
+
+        [data-theme="light"] .theme-toggle:hover {
+            text-shadow: none;
+        }
+
+        .theme-toggle:focus-visible {
+            outline: 1px solid var(--accent-color);
+            outline-offset: 4px;
+        }
+
+        main {
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        section {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 0;
+            padding: 2.2rem 2.4rem;
+            min-width: 0;
+            position: relative;
+            clip-path: polygon(14px 0, calc(100% - 14px) 0, 100% 14px, 100% calc(100% - 14px), calc(100% - 14px) 100%, 14px 100%, 0 calc(100% - 14px), 0 14px);
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 18px;
+            width: calc(100% - 36px);
+            height: 1px;
+            background: linear-gradient(90deg, var(--hud-line) 0%, transparent 80%);
+        }
+
+        section::after {
+            content: "";
+            position: absolute;
+            top: -1px;
+            right: 18px;
+            width: 12px;
+            height: 4px;
+            background-color: var(--hud-square);
+            box-shadow: 0 0 10px rgba(255, 59, 59, 0.6);
+        }
+
+        [data-theme="light"] section::after {
+            box-shadow: none;
+        }
+
+        section:hover {
+            background-color: var(--card-bg-hover);
+            border-color: var(--border-glow);
+            box-shadow: var(--shadow-glow);
+        }
+
+        section:last-child {
+            margin-bottom: 0;
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.22em;
+            position: relative;
+            padding-left: 1.4rem;
+        }
+
+        h2::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            background-color: var(--hud-square);
+            box-shadow: 0 0 12px rgba(255, 59, 59, 0.65);
+        }
+
+        [data-theme="light"] h2::before {
+            box-shadow: none;
+        }
+
+        h2::after {
+            content: "";
+            position: absolute;
+            left: 1.4rem;
+            bottom: -0.6rem;
+            width: 64px;
+            height: 1px;
+            background-color: var(--hud-line);
+        }
+
+        .info-item {
+            margin-bottom: 0.9rem;
+            word-break: break-word;
+            min-width: 0;
+            font-size: 0.98rem;
+        }
+
+        .info-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-label {
+            font-weight: 700;
+            color: var(--text-color);
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        li {
+            padding: 0.8rem 1.2rem 0.8rem 2.2rem;
+            position: relative;
+            word-break: break-word;
+            min-width: 0;
+            border: 1px solid transparent;
+            transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, text-shadow 0.25s ease;
+        }
+
+        li::before {
+            content: "";
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 6px;
+            height: 6px;
+            background-color: var(--list-dot);
+            box-shadow: 0 0 10px rgba(0, 224, 255, 0.7);
+        }
+
+        [data-theme="light"] li::before {
+            box-shadow: none;
+        }
+
+        li::after {
+            content: "";
+            position: absolute;
+            left: 1.8rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 10px;
+            height: 1px;
+            background-color: var(--hud-line);
+            opacity: 0.6;
+        }
+
+        li:not(:last-child) {
+            border-bottom: none;
+        }
+
+        li:hover {
+            background-color: var(--list-hover-bg);
+            border-color: var(--border-glow);
+            text-shadow: 0 0 6px rgba(0, 224, 255, 0.4);
+            box-shadow: inset 0 0 0 1px rgba(0, 224, 255, 0.18);
+        }
+
+        [data-theme="light"] li:hover {
+            text-shadow: none;
+            box-shadow: inset 0 0 0 1px rgba(214, 40, 40, 0.2);
+        }
+
+        @media (max-width: 720px) {
+            body {
+                padding: 2.2rem 1.2rem;
+            }
+
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            h1 {
+                font-size: 2rem;
+                letter-spacing: 0.14em;
+            }
+
+            section {
+                padding: 1.9rem 1.8rem;
+                clip-path: polygon(12px 0, calc(100% - 12px) 0, 100% 12px, 100% calc(100% - 12px), calc(100% - 12px) 100%, 12px 100%, 0 calc(100% - 12px), 0 12px);
+            }
+
+            h2 {
+                font-size: 1.25rem;
+                letter-spacing: 0.18em;
+            }
+        }
+
+        @media (max-width: 520px) {
+            body {
+                padding: 1.9rem 1rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+                letter-spacing: 0.12em;
+            }
+
+            section {
+                padding: 1.7rem 1.5rem;
+            }
+
+            h2 {
+                font-size: 1.18rem;
+                letter-spacing: 0.16em;
+            }
+
+            .theme-toggle {
+                font-size: 0.85rem;
+                letter-spacing: 0.14em;
+                padding: 0.55rem 1.2rem;
+            }
+
+            li {
+                padding-left: 2rem;
+            }
+
+            li::after {
+                left: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>个人介绍</h1>
+            <button class="theme-toggle" id="themeToggle" type="button">切换到浅色主题</button>
+        </header>
+        <main>
+            <section>
+                <h2>基本信息</h2>
+                <div class="info-item">
+                    <span class="info-label">用户名或昵称：</span>songyang-prog
+                </div>
+                <div class="info-item">
+                    <span class="info-label">学习方向：</span>正在探索
+                </div>
+            </section>
+            <section>
+                <h2>学习目标</h2>
+                <ul>
+                    <li>学会使用 Git 管理改动</li>
+                    <li>学会通过 PR 参与协作</li>
+                </ul>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        (function() {
+            const themeToggle = document.getElementById('themeToggle');
+            const htmlElement = document.documentElement;
+            const THEME_KEY = 'songyang-prog-theme';
+
+            function getPreferredTheme() {
+                const savedTheme = localStorage.getItem(THEME_KEY);
+                if (savedTheme === 'light' || savedTheme === 'dark') {
+                    return savedTheme;
+                }
+                return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+                    ? 'dark'
+                    : 'dark';
+            }
+
+            function applyTheme(theme) {
+                if (theme === 'light') {
+                    htmlElement.setAttribute('data-theme', 'light');
+                    themeToggle.textContent = '切换到深色主题';
+                } else {
+                    htmlElement.removeAttribute('data-theme');
+                    themeToggle.textContent = '切换到浅色主题';
+                }
+                localStorage.setItem(THEME_KEY, theme);
+            }
+
+            const currentTheme = getPreferredTheme();
+            applyTheme(currentTheme);
+
+            themeToggle.addEventListener('click', function() {
+                const isLight = htmlElement.getAttribute('data-theme') === 'light';
+                applyTheme(isLight ? 'dark' : 'light');
+            });
+        })();
+    </script>
+</body>
+</html>
